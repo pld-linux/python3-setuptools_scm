@@ -16,7 +16,7 @@ Source0:	https://pypi.python.org/packages/source/s/setuptools_scm/setuptools-scm
 # Source0-md5:	251730e2ca3ff05e6e1fcd4ba368e6a8
 URL:		https://bitbucket.org/pypa/setuptools_scm/
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.612
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
