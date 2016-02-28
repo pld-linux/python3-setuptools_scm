@@ -7,13 +7,13 @@
 Summary:	Python 2 package to manager versions by scm tags
 Summary(pl.UTF-8):	Pakiet Pythona 2 do zarządzania wersjami poprzez etykiety systemu kontroli wersji
 Name:		python-setuptools_scm
-Version:	1.2.0
-Release:	3
+Version:	1.10.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/pypi/setuptools_scm
-Source0:	https://pypi.python.org/packages/source/s/setuptools_scm/setuptools-scm-%{version}.tar.gz
-# Source0-md5:	251730e2ca3ff05e6e1fcd4ba368e6a8
+Source0:	https://pypi.python.org/packages/source/s/setuptools_scm/setuptools_scm-%{version}.tar.bz2
+# Source0-md5:	99823e2cd564b996f18820a065f0a974
 URL:		https://bitbucket.org/pypa/setuptools_scm/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.710
@@ -54,7 +54,7 @@ setuptools przeznaczone do stosowania w projektach opatych na
 systemach kontroli wersji Mercurial i Git.
 
 %prep
-%setup -q -n setuptools-scm-%{version}
+%setup -q -n setuptools_scm-%{version}
 
 %build
 %if %{with python2}
