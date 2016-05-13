@@ -7,23 +7,23 @@
 Summary:	Python 2 package to manager versions by scm tags
 Summary(pl.UTF-8):	Pakiet Pythona 2 do zarządzania wersjami poprzez etykiety systemu kontroli wersji
 Name:		python-setuptools_scm
-Version:	1.10.1
+Version:	1.11.0
 Release:	1
 License:	MIT
 Group:		Libraries/Python
-#Source0Download: https://pypi.python.org/pypi/setuptools_scm
-Source0:	https://pypi.python.org/packages/source/s/setuptools_scm/setuptools_scm-%{version}.tar.bz2
-# Source0-md5:	99823e2cd564b996f18820a065f0a974
-URL:		https://bitbucket.org/pypa/setuptools_scm/
+#Source0Download: https://pypi.python.org/simple/setuptools_scm
+Source0:	https://pypi.python.org/packages/cd/5f/e3a038292358058d83d764a47d09114aa5a8003ed4529518f9e580f1a94f/setuptools_scm-%{version}.tar.gz
+# Source0-md5:	4c5c896ba52e134bbc3507bac6400087
+URL:		https://github.com/pypa/setuptools_scm
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
-BuildRequires:	python-modules >= 1:2.6
+BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3-setuptools
-BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.3
 %endif
 Requires:	python-setuptools
 BuildArch:	noarch
