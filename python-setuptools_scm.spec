@@ -1,8 +1,9 @@
 #
 # Conditional build:
-%bcond_without	tests	# py.test tests
-%bcond_without	python2 # CPython 2.x module
-%bcond_without	python3 # CPython 3.x module
+%bcond_without	tests		# py.test tests
+%bcond_with	tests_scm	# py.test tests using SCM programs (git, hg)
+%bcond_without	python2		# CPython 2.x module
+%bcond_without	python3		# CPython 3.x module
 
 Summary:	Python 2 package to manager versions by scm tags
 Summary(pl.UTF-8):	Pakiet Pythona 2 do zarządzania wersjami poprzez etykiety systemu kontroli wersji
@@ -33,6 +34,10 @@ BuildRequires:	python3-pytest
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
+%if %{with tests_scm}
+BuildRequires:	git-core
+BuildRequires:	mercurial
+%endif
 Requires:	python-setuptools
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -63,6 +68,10 @@ systemach kontroli wersji Mercurial i Git.
 
 %prep
 %setup -q -n setuptools_scm-%{version}
+
+%if %{without tests_scm}
+%{__rm} testing/test_{git,mercurial}.py
+%endif
 
 %build
 %if %{with python2}
