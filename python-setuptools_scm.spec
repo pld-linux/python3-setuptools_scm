@@ -1,30 +1,38 @@
 #
 # Conditional build:
-%bcond_without	tests	# do not perform "make test"
+%bcond_without	tests	# py.test tests
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
 Summary:	Python 2 package to manager versions by scm tags
 Summary(pl.UTF-8):	Pakiet Pythona 2 do zarządzania wersjami poprzez etykiety systemu kontroli wersji
 Name:		python-setuptools_scm
-Version:	1.11.0
-Release:	2
+Version:	1.15.0
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/setuptools_scm
-Source0:	https://pypi.python.org/packages/cd/5f/e3a038292358058d83d764a47d09114aa5a8003ed4529518f9e580f1a94f/setuptools_scm-%{version}.tar.gz
-# Source0-md5:	4c5c896ba52e134bbc3507bac6400087
+Source0:	https://pypi.python.org/packages/80/b7/31b6ae5fcb188e37f7e31abe75f9be90490a5456a72860fa6e643f8a3cbc/setuptools_scm-%{version}.tar.gz
+# Source0-md5:	b6916c78ed6253d6602444fad4279c5b
 URL:		https://github.com/pypa/setuptools_scm
-BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
-BuildRequires:	python-modules >= 1:2.7
+BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
+%if %{with tests}
+BuildRequires:	python-py >= 1.4.26
+BuildRequires:	python-pytest
+%endif
 %endif
 %if %{with python3}
 BuildRequires:	python3-setuptools
 BuildRequires:	python3-modules >= 1:3.3
+%if %{with tests}
+BuildRequires:	python3-py >= 1.4.26
+BuildRequires:	python3-pytest
 %endif
+%endif
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.714
 Requires:	python-setuptools
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -58,13 +66,15 @@ systemach kontroli wersji Mercurial i Git.
 
 %build
 %if %{with python2}
-%{__python} setup.py \
-	build --build-base build-2 %{?with_tests:test}
+%py_build
+
+%{?with_tests:%{__python} -mpytest}
 %endif
 
 %if %{with python3}
-%{__python3} setup.py \
-	build --build-base build-3 %{?with_tests:test}
+%py3_build
+
+%{?with_tests:%{__python3} -mpytest}
 %endif
 
 %install
