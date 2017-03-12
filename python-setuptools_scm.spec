@@ -70,7 +70,7 @@ systemach kontroli wersji Mercurial i Git.
 %setup -q -n setuptools_scm-%{version}
 
 %if %{without tests_scm}
-%{__rm} testing/test_{git,mercurial}.py
+%{__rm} testing/test_{git,mercurial,regressions}.py
 %endif
 
 %build
