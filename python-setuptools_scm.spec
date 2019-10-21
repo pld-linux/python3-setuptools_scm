@@ -81,7 +81,7 @@ systemach kontroli wersji Mercurial i Git.
 %py_build
 
 %if %{with tests}
-PYTHONPATH=$(pwd) \
+PYTHONPATH=$(pwd)/build-2/lib \
 %{__python} -m pytest
 %endif
 %endif
@@ -90,7 +90,7 @@ PYTHONPATH=$(pwd) \
 %py3_build
 
 %if %{with tests}
-PYTHONPATH=$(pwd) \
+PYTHONPATH=$(pwd)/build-3/lib \
 %{__python3} -m pytest
 %endif
 %endif
