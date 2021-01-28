@@ -9,7 +9,7 @@ Summary:	Python 2 package to manager versions by scm tags
 Summary(pl.UTF-8):	Pakiet Pythona 2 do zarządzania wersjami poprzez etykiety systemu kontroli wersji
 Name:		python-setuptools_scm
 Version:	5.0.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/setuptools_scm/
@@ -39,6 +39,7 @@ BuildRequires:	git-core
 BuildRequires:	mercurial
 %endif
 Requires:	python-setuptools
+Requires:	python-toml
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -56,6 +57,7 @@ Summary:	Python 3 package to manager versions by scm tags
 Summary(pl.UTF-8):	Pakiet Pythona 3 do zarządzania wersjami poprzez etykiety systemu kontroli wersji
 Group:		Libraries/Python
 Requires:	python3-setuptools
+Requires:	python3-toml
 
 %description -n python3-setuptools_scm
 setuptools_scm is a simple utility for the setup_requires feature of
