@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	tests		# py.test tests
+%bcond_without	tests		# py.test tests
 %bcond_with	tests_scm	# py.test tests using SCM programs (git, hg)
 %bcond_without	python2		# CPython 2.x module
 %bcond_without	python3		# CPython 3.x module
@@ -18,18 +18,20 @@ Source0:	https://files.pythonhosted.org/packages/source/s/setuptools_scm/setupto
 URL:		https://github.com/pypa/setuptools_scm
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
-BuildRequires:	python-setuptools
+BuildRequires:	python-setuptools >= 42
 %if %{with tests}
 BuildRequires:	python-py >= 1.4.26
 BuildRequires:	python-pytest >= 3.1.0
+BuildRequires:	python-toml
 %endif
 %endif
 %if %{with python3}
-BuildRequires:	python3-setuptools
 BuildRequires:	python3-modules >= 1:3.5
+BuildRequires:	python3-setuptools >= 42
 %if %{with tests}
 BuildRequires:	python3-py >= 1.4.26
 BuildRequires:	python3-pytest >= 3.1.0
+BuildRequires:	python3-toml
 %endif
 %endif
 BuildRequires:	rpm-pythonprov
@@ -78,15 +80,13 @@ systemach kontroli wersji Mercurial i Git.
 # tries to install using pip
 %{__rm} testing/test_setuptools_support.py
 
-# fails due to unknown reason
-%{__sed} -i -e '/test_fallback/ i@pytest.mark.skip("fails")' testing/test_basic_api.py
-
 %build
 %if %{with python2}
 %py_build
 
 %if %{with tests}
-PYTHONPATH=$(pwd)/build-2/lib \
+PYTHONPATH=$(pwd)/src \
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 %{__python} -m pytest testing
 %endif
 %endif
@@ -95,7 +95,8 @@ PYTHONPATH=$(pwd)/build-2/lib \
 %py3_build
 
 %if %{with tests}
-PYTHONPATH=$(pwd)/build-3/lib \
+PYTHONPATH=$(pwd)/src \
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 %{__python3} -m pytest testing
 %endif
 %endif
