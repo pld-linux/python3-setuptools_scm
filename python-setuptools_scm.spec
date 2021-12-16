@@ -18,7 +18,7 @@ Source0:	https://files.pythonhosted.org/packages/source/s/setuptools_scm/setupto
 URL:		https://github.com/pypa/setuptools_scm
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
-BuildRequires:	python-setuptools >= 42
+BuildRequires:	python-setuptools >= 1:42
 %if %{with tests}
 BuildRequires:	python-py >= 1.4.26
 BuildRequires:	python-pytest >= 3.1.0
@@ -27,7 +27,7 @@ BuildRequires:	python-toml
 %endif
 %if %{with python3}
 BuildRequires:	python3-modules >= 1:3.5
-BuildRequires:	python3-setuptools >= 42
+BuildRequires:	python3-setuptools >= 1:42
 %if %{with tests}
 BuildRequires:	python3-py >= 1.4.26
 BuildRequires:	python3-pytest >= 3.1.0
