@@ -14,12 +14,12 @@ Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/s/setuptools_scm/setuptools_scm-%{version}.tar.gz
 # Source0-md5:	b4e02bf8e62ed49142ea7b42a68671d7
 URL:		https://github.com/pypa/setuptools_scm
-BuildRequires:	python3-modules >= 1:3.5
-BuildRequires:	python3-setuptools >= 1:42
+BuildRequires:	python3-modules >= 1:3.6
+BuildRequires:	python3-packaging >= 20.0
+BuildRequires:	python3-setuptools >= 1:45
+BuildRequires:	python3-tomli >= 1.0.0
 %if %{with tests}
-BuildRequires:	python3-py >= 1.4.26
 BuildRequires:	python3-pytest >= 3.1.0
-BuildRequires:	python3-toml
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -27,8 +27,7 @@ BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	git-core
 BuildRequires:	mercurial
 %endif
-Requires:	python3-setuptools
-Requires:	python3-toml
+Requires:	python3-setuptools >= 1:45
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
