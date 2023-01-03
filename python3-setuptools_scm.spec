@@ -7,7 +7,7 @@ Summary:	Python 3 package to manager versions by scm tags
 Summary(pl.UTF-8):	Pakiet Pythona 3 do zarządzania wersjami poprzez etykiety systemu kontroli wersji
 Name:		python3-setuptools_scm
 Version:	6.4.2
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/setuptools_scm/
