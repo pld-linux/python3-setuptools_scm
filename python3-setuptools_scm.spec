@@ -6,17 +6,17 @@
 Summary:	Python 3 package to manager versions by scm tags
 Summary(pl.UTF-8):	Pakiet Pythona 3 do zarządzania wersjami poprzez etykiety systemu kontroli wersji
 Name:		python3-setuptools_scm
-Version:	6.4.2
-Release:	2
+Version:	8.1.0
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/setuptools_scm/
 Source0:	https://files.pythonhosted.org/packages/source/s/setuptools_scm/setuptools_scm-%{version}.tar.gz
-# Source0-md5:	b4e02bf8e62ed49142ea7b42a68671d7
+# Source0-md5:	d8046dce093a94dc382b68b45f6a6257
 URL:		https://github.com/pypa/setuptools_scm
-BuildRequires:	python3-modules >= 1:3.6
+BuildRequires:	python3-modules >= 1:3.8
 BuildRequires:	python3-packaging >= 20.0
-BuildRequires:	python3-setuptools >= 1:45
+BuildRequires:	python3-setuptools >= 1:61
 BuildRequires:	python3-tomli >= 1.0.0
 %if %{with tests}
 BuildRequires:	python3-pytest >= 3.1.0
@@ -27,7 +27,8 @@ BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	git-core
 BuildRequires:	mercurial
 %endif
-Requires:	python3-setuptools >= 1:45
+Requires:	python3-modules >= 1:3.8
+Requires:	python3-setuptools >= 1:61
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -47,14 +48,16 @@ systemach kontroli wersji Mercurial i Git.
 %{__rm} testing/test_{file_finder,git,mercurial,regressions}.py
 %endif
 
-# tries to install using pip
-%{__rm} testing/test_setuptools_support.py
+cat > setup.py <<EOF
+from setuptools import setup
+setup()
+EOF
 
 %build
+export PYTHONPATH=$(pwd):$(pwd)/src
 %py3_build
 
 %if %{with tests}
-PYTHONPATH=$(pwd)/src \
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 %{__python3} -m pytest testing
 %endif
@@ -62,6 +65,7 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 %install
 rm -rf $RPM_BUILD_ROOT
 
+export PYTHONPATH=$(pwd):$(pwd)/src
 %py3_install
 
 %clean
@@ -69,6 +73,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG.rst LICENSE README.rst
+%doc CHANGELOG.md LICENSE README.md
 %{py3_sitescriptdir}/setuptools_scm
 %{py3_sitescriptdir}/setuptools_scm-%{version}-py*.egg-info
