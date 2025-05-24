@@ -17,12 +17,20 @@ URL:		https://github.com/pypa/setuptools_scm
 BuildRequires:	python3-modules >= 1:3.8
 BuildRequires:	python3-packaging >= 20.0
 BuildRequires:	python3-setuptools >= 1:61
+%if "%{_ver_lt %{py3_ver} 3.11}" == "1"
 BuildRequires:	python3-tomli >= 1.0.0
+%endif
 %if %{with tests}
+BuildRequires:	python3-build
 BuildRequires:	python3-pytest >= 3.1.0
+BuildRequires:	python3-rich
+%if "%{_ver_lt %{py3_ver} 3.11}" == "1"
+BuildRequires:	python3-typing_extensions
+%endif
+BuildRequires:	python3-wheel
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.714
+BuildRequires:	rpmbuild(macros) >= 1.750
 %if %{with tests_scm}
 BuildRequires:	git-core
 BuildRequires:	mercurial
